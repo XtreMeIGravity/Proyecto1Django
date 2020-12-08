@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Prueba(models.Model):
@@ -12,4 +13,4 @@ class Prueba(models.Model):
         verbose_name_plural = "Pruebas"
 
     def __str__(self):
-        return self.titulo+' '+self.subtitulo+' '+str(self.cantidad)
+        return self.titulo + ' ' + self.subtitulo + ' ' + str(self.cantidad)
