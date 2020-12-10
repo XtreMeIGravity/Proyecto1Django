@@ -8,8 +8,10 @@ class Departamento(models.Model):
     anulate = models.BooleanField('anulado',default=False)
 
     class Meta:
-        verbose_name = "modelDepartamento"
-        verbose_name_plural = "modelDepartamentos"
+        verbose_name = "Departamento"
+        verbose_name_plural = "Departamentos"
+        ordering = ['short_name']
+        unique_together = ('name', 'short_name')
 
     def __str__(self):
         return str(self.id) + ' - ' + self.name + ' ' + self.short_name
