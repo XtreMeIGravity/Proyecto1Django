@@ -43,4 +43,4 @@ class Empleado(models.Model):
         unique_together = ('last_name', 'firts_name')
 
     def __str__(self):
-        return self.firts_name +' - '+ self.last_name
+        return self.firts_name +' - '+ self.last_name +' - '+self.get_job_display()
