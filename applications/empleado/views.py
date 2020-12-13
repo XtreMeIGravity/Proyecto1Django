@@ -48,14 +48,11 @@ class ListByJob(ListView):
 
     def get_queryset(self):
         trabajo = self.request.GET.get('Buscador', '')
-        ListaChoice = Empleado.Job_Choices[::]
-        trabajoSelect = ''
-        for n in ListaChoice:
-            if n[1] == trabajo:
-                trabajoSelect = n[0]
+        ListaChoice = Empleado.Job_Choices
+        trabajoSelect = [n[0] for n in ListaChoice if n[1] == trabajo]
         Lista = Empleado.objects.filter(
-            job=trabajoSelect
-        )
+            job=trabajoSelect[0]
+            )
         return Lista
 
 
