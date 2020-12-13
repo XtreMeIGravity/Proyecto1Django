@@ -1,9 +1,13 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 
 # Create your views here.
 
 from django.views.generic import (
     ListView,
+    DetailView,
+    CreateView,
+    TemplateView,
 )
 
 # Models
@@ -52,7 +56,7 @@ class ListByJob(ListView):
         trabajoSelect = [n[0] for n in ListaChoice if n[1] == trabajo]
         Lista = Empleado.objects.filter(
             job=trabajoSelect[0]
-            )
+        )
         return Lista
 
 
@@ -64,3 +68,40 @@ class ListByHabilidades(ListView):
         empleado = Empleado.objects.get(id=2)
         print(empleado.habilidades.all())
         return []
+
+
+class EmpleadoDetailView(DetailView):
+    model = Empleado
+    template_name = "empleado/EmpleadoDetailView.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
+        context['titulo'] = 'EmpleadoDelMes'
+        return context
+
+
+class successEmpleado(TemplateView):
+    template_name = "empleado/success.html"
+
+
+class AddEmpleadoCreateView(CreateView):
+    model = Empleado
+    template_name = "empleado/AddEmpleado.html"
+    # fields = ('__all__')
+    fields = [
+        'firts_name',
+        'last_name',
+        'job',
+        'departamento',
+        'habilidades',
+        'hoja_vida',
+    ]
+    success_url = reverse_lazy('Empleado_App:RegistroCorrecto')
+
+    def form_valid(self, form):
+        # Logic Process
+        empleado = form.save()
+        empleado.full_name = empleado.firts_name+' '+empleado.last_name
+        empleado.save()
+        return super(AddEmpleadoCreateView, self).form_valid(form)
+
