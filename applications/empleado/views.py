@@ -48,10 +48,15 @@ class ListByJob(ListView):
 
     def get_queryset(self):
         trabajo = self.request.GET.get('Buscador', '')
-        ListaxD = Empleado.objects.all()
-        for x in ListaxD:
-            print(x.job.get_job_display() )
-        return ListaxD
+        ListaChoice = Empleado.Job_Choices[::]
+        trabajoSelect = ''
+        for n in ListaChoice:
+            if n[1] == trabajo:
+                trabajoSelect = n[0]
+        Lista = Empleado.objects.filter(
+            job=trabajoSelect
+        )
+        return Lista
 
 
 class ListByHabilidades(ListView):
