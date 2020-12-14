@@ -33,7 +33,7 @@ class Empleado(models.Model):
     job = models.CharField('Trabajo', max_length=1, choices=Job_Choices)
     departamento = models.ForeignKey(Departamento, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to='empleado', blank=True, null=True)
-    # Realcion muchos a muchos
+    # Relation many to many
     habilidades = models.ManyToManyField(Habilidad)
     hoja_vida = RichTextField()
     

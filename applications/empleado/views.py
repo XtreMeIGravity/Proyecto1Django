@@ -8,6 +8,8 @@ from django.views.generic import (
     DetailView,
     CreateView,
     TemplateView,
+    UpdateView,
+    DeleteView,
 )
 
 # Models
@@ -84,6 +86,7 @@ class successEmpleado(TemplateView):
     template_name = "empleado/success.html"
 
 
+# add view
 class AddEmpleadoCreateView(CreateView):
     model = Empleado
     template_name = "empleado/AddEmpleado.html"
@@ -96,12 +99,61 @@ class AddEmpleadoCreateView(CreateView):
         'habilidades',
         'hoja_vida',
     ]
-    success_url = reverse_lazy('Empleado_App:RegistroCorrecto')
+    success_url = reverse_lazy('Empleado_App:Correcto')
 
     def form_valid(self, form):
         # Logic Process
         empleado = form.save()
-        empleado.full_name = empleado.firts_name+' '+empleado.last_name
+        empleado.full_name = empleado.firts_name + ' ' + empleado.last_name
         empleado.save()
         return super(AddEmpleadoCreateView, self).form_valid(form)
 
+
+class successUpdateEmpleado(TemplateView):
+    template_name = "empleado/sucessUpdate.html"
+
+
+# update view
+class EmpleadoUpdateView(UpdateView):
+    model = Empleado
+    template_name = "empleado/UpdateEmpleado.html"
+    fields = [
+        'firts_name',
+        'last_name',
+        'job',
+        'departamento',
+        'habilidades',
+        'hoja_vida',
+    ]
+    success_url = reverse_lazy('Empleado_App:Correcto')
+
+    # Intercept values of POST
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        print(request.POST)
+        print(request.POST['last_name'])
+        return super().post(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        # Logic Process
+        empleado = form.save()
+        empleado.full_name = empleado.firts_name + ' ' + empleado.last_name
+        empleado.save()
+        return super(EmpleadoUpdateView, self).form_valid(form)
+
+
+# delete view
+class EmpleadoDeleteView(DeleteView):
+    model = Empleado
+    template_name = "empleado/DeleteEmpleado.html"
+    success_url = reverse_lazy('Empleado_App:Correcto')
+
+    def delete(self, request, *args, **kwargs):
+        """
+        Call the delete() method on the fetched object and then redirect to the
+        success URL.
+        """
+        self.object = self.get_object()
+        success_url = self.get_success_url()
+        self.object.delete()
+        return HttpResponseRedirect(success_url)

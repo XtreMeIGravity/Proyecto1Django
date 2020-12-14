@@ -11,7 +11,10 @@ urlpatterns = [
     path('ListaEmpleadosHabilidades/', views.ListByHabilidades.as_view()),
     path('ListaEmpleadosJob/', views.ListByJob.as_view()),
     path('VerEmpleado/<pk>/', views.EmpleadoDetailView.as_view()),
+    # Operations CRUD
+    path('success/', views.successEmpleado.as_view(), name='Correcto'),
     path('RegistrarEmpleado/', views.AddEmpleadoCreateView.as_view()),
-    path('success/', views.successEmpleado.as_view(), name='RegistroCorrecto'),
+    path('ActualizarEmpleado/<pk>/', views.EmpleadoUpdateView.as_view(), name='ActualizarEmpleado'),
+    path('BorrarEmpleado/<pk>/', views.EmpleadoDeleteView.as_view(), name='BorradoCorrectamente'),
 
 ]
