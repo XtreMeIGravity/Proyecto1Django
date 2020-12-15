@@ -1,10 +1,7 @@
 from django.urls import path
 
-
-def desde_dep(selft):
-    print("Alo Departamento")
-
+from . import views
 
 urlpatterns = [
-    path('departamento/', desde_dep),
+    path('NewDepartamento/', views.NewDepartamentoView.as_view(), name='nuevo_departamento'),
 ]

@@ -35,7 +35,7 @@ class Empleado(models.Model):
     avatar = models.ImageField(upload_to='empleado', blank=True, null=True)
     # Relation many to many
     habilidades = models.ManyToManyField(Habilidad)
-    hoja_vida = RichTextField()
+    hoja_vida = RichTextField(blank=True, null=True)
     
     class Meta:
         verbose_name = "Empleado"

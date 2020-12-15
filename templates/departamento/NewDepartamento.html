@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nuevo Departamento</title>
+</head>
+<body>
+<form action="" method="post">{% csrf_token %}
+    <h3>Datos Empleado</h3>
+    <p>
+        {{ form.nombre_Empleado }}
+    </p>
+    <p>
+        {{ form.apellidos_Empleado }}
+    </p>
+    <h3>Datos Empleado</h3>
+    <p>
+        {{ form.nombre_Departamento }}
+    </p>
+    <p>
+        {{ form.ShorName_Departamento }}
+    </p>
+    <input type="submit" value="Agregar">
+</form>
+</body>
+</html>
