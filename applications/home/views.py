@@ -13,10 +13,6 @@ from .models import Prueba
 from .forms import PruebaForm
 
 
-class pruebaView(TemplateView):
-    template_name = 'home/prueba.html'
-
-
 class pruebaListView(ListView):
     template_name = "home/Lista.html"
     context_object_name = 'listaNumerosYPapas'
@@ -38,3 +34,18 @@ class PruebaCreateView(CreateView):
     # Import Form
     success_url = '/'
 
+
+# Template view
+# Normal
+class pruebaView(TemplateView):
+    template_name = 'home/prueba.html'
+
+
+# HEADER
+class HeaderView(TemplateView):
+    template_name = "home/conmon/header.html"
+
+
+# FOOTER
+class FooterView(TemplateView):
+    template_name = "home/conmon/Footer.html"

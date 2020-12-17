@@ -1,14 +1,18 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
-</head>
-<body>
-    <p  class="ejemplo1">Hola como tas?</p>
-    <h2 class="ejemplo2">Cargando</h2>
-    <input type="submit" value="wqfdewq">
-</body>
-</html>
+{% extends 'home/conmon/base_home.html' %}
+{% load static  %}
+{% block titulo %}
+    Prueba
+{% endblock titulo %}
+
+{% block cuerpo %}
+    <div class="card" style="width: 300px;">
+      <div class="card-divider">
+        This is a header
+      </div>
+      <img src="assets/img/generic/rectangle-1.jpg">
+      <div class="card-section">
+        <h4>This is a card.</h4>
+        <p>It has an easy to override visual style, and is appropriately subdued.</p>
+      </div>
+    </div>
+{% endblock cuerpo %}
