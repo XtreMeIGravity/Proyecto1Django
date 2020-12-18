@@ -5,6 +5,7 @@ from . import views
 app_name = "Empleado_App"
 
 urlpatterns = [
+    path('', views.IndexEmpleadoView.as_view(), name="Index"),
     path('ListaEmpleados/', views.ListAllEmpleados.as_view()),
     path('ListaEmpleadosDepto/<nameArea>/', views.ListByArea.as_view()),
     path('ListaEmpleadosKeyword/', views.ListByKeyword.as_view()),

@@ -16,6 +16,11 @@ from django.views.generic import (
 from .models import Empleado
 
 
+class IndexEmpleadoView(TemplateView):
+    """vista que carga la pagina de inicio"""
+    template_name = "IndexEmpleado.html"
+
+
 class ListAllEmpleados(ListView):
     template_name = 'empleado/list_all.html'
     model = Empleado
