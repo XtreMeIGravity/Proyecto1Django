@@ -25,8 +25,14 @@ class ListAllEmpleados(ListView):
     template_name = 'empleado/list_all.html'
     model = Empleado
     context_object_name = 'listaEmpleados'
-    paginate_by = 5
     ordering = 'firts_name'
+
+    def get_queryset(self):
+        busqueda = self.request.GET.get('keyword', '')
+        lista = Empleado.objects.filter(
+            firts_name__icontains=busqueda,
+        )
+        return lista
 
 
 class ListByArea(ListView):
@@ -152,5 +158,3 @@ class EmpleadoDeleteView(DeleteView):
     model = Empleado
     template_name = "empleado/DeleteEmpleado.html"
     success_url = reverse_lazy('Empleado_App:Correcto')
-
-

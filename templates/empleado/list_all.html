@@ -1,9 +1,53 @@
-<h1>Lista Empleados</h1>
+{% extends 'base.html' %}
 
-{{ listaEmpleados }}
+{% load static%}
 
-<ul>
-{% for x in listaEmpleados %}
-    <li>{{ x }}</li>
-{% endfor %}
-</ul>
+{% block title %} Listar Empleados{% endblock title %}
+
+{% block cuerpo %}
+    {% include "includes/header.html" %}
+    <!-- BLOQUE DE BIENVENIDA -->
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1 class="cell">Todos los Empleados</h1>
+            <div class="cell grid-x">
+                <form action="" method="get">{% csrf_token %}
+                    <div class="large-6'">
+                        <input type="text" name="keyword" id="keyword" placeholder="BuscarEmpleado">
+                    </div>
+                    <div class="large-2">
+                        <input class="button" type="submit" value="BUSCAR">
+                    </div>
+                </form>
+            </div>
+            <div class="cell">
+                <table>
+                    <thead>
+                        <td>ID</td>
+                        <td>Nombre</td>
+                        <td>Apellido</td>
+                        <td>Depto</td>
+                        <td>Job</td>
+                        <td>Accion</td>
+                    </thead>
+                    {% for x in listaEmpleados %}
+                    <tr>
+                        <td>{{ x.id }}</td>
+                        <td>{{ x.firts_name }}</td>
+                        <td>{{ x.last_name }}</td>
+                        <td>{{ x.departamento }}</td>
+                        <td>{{ x.job }}</td>
+                        <td>
+                            <a class="button success" href="{% url 'Empleado_App:DetalleEmpleado' x.id %}" >Ver</a>
+                            <a class="button warning" >Actualizar</a>
+                            <a class="button alert" >Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- FIN BLOQUE DE BIENVENIDA -->
+{% endblock cuerpo %}
