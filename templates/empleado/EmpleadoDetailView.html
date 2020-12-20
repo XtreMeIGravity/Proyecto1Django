@@ -1,18 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalle de un empleado</title>
-</head>
-<body>
-    <p>{{ titulo }}</p>
-    <p>{{ empleado }}</p>
-    <h3>Todos los datos</h3>
-    <p>{{ empleado.firts_name }}</p>
-    <p>{{ empleado.last_name }}</p>
-    <p>{{ empleado.job }}</p>
-    <p>{{ empleado.departamento }}</p>
-    <p>{{ empleado.habilidades.all }}</p>
+{% extends 'base.html' %}
+{% load static%}
 
-</body>
-</html>
+{% block title %}Detalle Empleado{% endblock title %}
+
+{% block cuerpo %}
+    {% include "includes/header.html" %}
+    <div class="grid-container">
+        <div class="grid-x">
+            <h3 class="cell">Todos los datos</h3>
+            <label class="cell" for="name">Nombre:<input type="text" name="name" id="name" disabled value="{{ empleado.firts_name }}"></label>
+            <label class="cell" for="last_name">Apellido:<input type="text" name="last_name" id="last_name" disabled value="{{ empleado.last_name }}"></label>
+            <label class="cell" for="name_job">Trabajo:<input type="text" name="name_job" id="name_job" disabled value="{{ name_job }}"></label>
+            <label class="cell" for="depto">Departamento:<input type="text" name="depto" id="depto" disabled value="{{ empleado.departamento }}"></label>
+            <h3>Habilidades</h3>
+            {% for habilidades in empleado.habilidades.all %}
+                <ul class="cell">
+                    <li>{{ habilidades.habilidad }}</li>
+                </ul>
+            {% endfor %}
+
+
+        </div>
+    </div>
+
+{% endblock cuerpo %}

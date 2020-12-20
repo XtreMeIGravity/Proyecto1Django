@@ -21,11 +21,13 @@ class IndexEmpleadoView(TemplateView):
     template_name = "IndexEmpleado.html"
 
 
+# GRID DATA
 class ListAllEmpleados(ListView):
     template_name = 'empleado/list_all.html'
     model = Empleado
     context_object_name = 'listaEmpleados'
     ordering = 'firts_name'
+    paginate_by = 5
 
     def get_queryset(self):
         busqueda = self.request.GET.get('keyword', '')
@@ -35,64 +37,20 @@ class ListAllEmpleados(ListView):
         return lista
 
 
-class ListByArea(ListView):
-    template_name = 'empleado/list_depto.html'
-    context_object_name = 'ListaPorDepartamento'
-
-    def get_queryset(self):
-        area = self.kwargs['nameArea']
-        lista = Empleado.objects.filter(
-            departamento__name=area
-        )
-        return lista
-
-
-class ListByKeyword(ListView):
-    template_name = "empleado/list_keyword.html"
-    context_object_name = "ListaEmpleadoPorTrabajo"
-
-    def get_queryset(self):
-        palabra_buscar = self.request.GET.get('Buscador', '')
-        Lista = Empleado.objects.filter(
-            firts_name=palabra_buscar
-        )
-        return Lista
-
-
-class ListByJob(ListView):
-    template_name = "empleado/list_job.html"
-    context_object_name = "ListaPorTrabajo"
-
-    def get_queryset(self):
-        trabajo = self.request.GET.get('Buscador', '')
-        ListaChoice = Empleado.Job_Choices
-        trabajoSelect = [n[0] for n in ListaChoice if n[1] == trabajo]
-        Lista = Empleado.objects.filter(
-            job=trabajoSelect[0]
-        )
-        return Lista
-
-
-class ListByHabilidades(ListView):
-    template_name = "empleado/List_Habilidades.html"
-    context_object_name = "ListaPorHabilidades"
-
-    def get_queryset(self):
-        empleado = Empleado.objects.get(id=2)
-        print(empleado.habilidades.all())
-        return []
-
-
+# Detail View
 class EmpleadoDetailView(DetailView):
     model = Empleado
     template_name = "empleado/EmpleadoDetailView.html"
 
     def get_context_data(self, **kwargs):
         context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
-        context['titulo'] = 'EmpleadoDelMes'
+        ListaChoice = Empleado.Job_Choices
+        res = [n[1] for n in ListaChoice if n[0] == self.object.job]
+        context['name_job'] = res[0]
         return context
 
 
+# Success Message
 class successEmpleado(TemplateView):
     template_name = "empleado/success.html"
 
