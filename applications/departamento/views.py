@@ -2,8 +2,14 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 
 # Create your views here.
-
 from django.views.generic.edit import FormView
+from django.views.generic import (
+    ListView,
+    CreateView,
+    UpdateView,
+    DeleteView,
+    TemplateView,
+)
 
 # Formularios
 from .forms import NewDepartamentoForm
@@ -14,6 +20,21 @@ from .models import Departamento
 
 
 # Create your views here.
+
+# List View
+class DepartamentoListView(ListView):
+    model = Departamento
+    template_name = "departamento/list_all.html"
+    paginate_by = 5
+    context_object_name = "listDepartamentos"
+
+    def get_queryset(self):
+        busqueda = self.request.GET.get('keyword', '')
+        lista = Departamento.objects.filter(
+            name__icontains=busqueda,
+        )
+        return lista
+
 
 class NewDepartamentoView(FormView):
     template_name = "departamento/NewDepartamento.html"

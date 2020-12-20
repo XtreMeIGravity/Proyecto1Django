@@ -6,6 +6,7 @@
 
 {% block cuerpo %}
     {% include "includes/header.html" %}
+    <!-- BLOQUE GENERAL -->
     <div class="grid-container">
         <div class="grid-x">
             <!-- BLOQUE DE BIENVENIDA -->
@@ -33,21 +34,22 @@
                         <td>Job</td>
                         <td>Accion</td>
                     </thead>
-                    {% for x in listaEmpleados %}
-                    <tr>
-                        <td>{{ x.id }}</td>
-                        <td>{{ x.firts_name }}</td>
-                        <td>{{ x.last_name }}</td>
-                        <td>{{ x.departamento }}</td>
-                        <td>{{ x.job }}</td>
-                        <td>
-                            <a class="button success" href="{% url 'Empleado_App:DetalleEmpleado' x.id %}" >Ver</a>
-                            <a class="button warning" >Actualizar</a>
-                            <a class="button alert" >Borrar</a>
-                        </td>
-                    </tr>
-                    {% endfor %}
-
+                    <tbody>
+                        {% for x in listaEmpleados %}
+                        <tr>
+                            <td>{{ x.id }}</td>
+                            <td>{{ x.firts_name }}</td>
+                            <td>{{ x.last_name }}</td>
+                            <td>{{ x.departamento }}</td>
+                            <td>{{ x.job }}</td>
+                            <td>
+                                <a class="button success" href="{% url 'Empleado_App:DetalleEmpleado' x.id %}" >Ver</a>
+                                <a class="button warning" >Actualizar</a>
+                                <a class="button alert" >Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
                 </table>
             </div>
             <!--FIN TABLA-->
@@ -82,5 +84,5 @@
             <!-- FINPAGINACION-->
         </div>
     </div>
-    <!-- FIN BLOQUE DE BIENVENIDA -->
+    <!-- FIN BLOQUE GENERAL -->
 {% endblock cuerpo %}
