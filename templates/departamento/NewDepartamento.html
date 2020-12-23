@@ -1,26 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Nuevo Departamento</title>
-</head>
-<body>
-<form action="" method="post">{% csrf_token %}
-    <h3>Datos Empleado</h3>
-    <p>
-        {{ form.nombre_Empleado }}
-    </p>
-    <p>
-        {{ form.apellidos_Empleado }}
-    </p>
-    <h3>Datos Empleado</h3>
-    <p>
-        {{ form.nombre_Departamento }}
-    </p>
-    <p>
-        {{ form.ShorName_Departamento }}
-    </p>
-    <input type="submit" value="Agregar">
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load static%}
+
+{% block title %} Agregar Empleado{% endblock title %}
+
+{% block cuerpo %}
+    {% include "includes/header.html" %}
+
+    <!-- BLOQUE DE REGISTRO-->
+    <div class="grid-container">
+        <form action="" method="post">{% csrf_token %}
+            <div class="grid-x grid-padding-x">
+                <h3 class="cell">Datos Empleado</h3>
+                <div class="medium-6 cell">
+                    <label>Nombre Empleado:
+                        {{ form.nombre_Empleado }}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Apellido Empleado:
+                        {{ form.apellidos_Empleado }}
+                    </label>
+                </div>
+            </div>
+            <div class="grid-x grid-padding-x">
+            <h3 class="cell">Datos Departamento</h3>
+                <div class="medium-6 cell">
+                    <label>Nombre Departamento:
+                        {{ form.nombre_Departamento }}
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Nombre corto departamento:
+                        {{ form.ShorName_Departamento }}
+                    </label>
+                </div>
+            </div>
+                <input class="cell button" type="submit" value="Agregar">
+        </form>
+    </div>
+    <!-- FIN BLOQUE DE REGISTRO -->
+{% endblock cuerpo %}

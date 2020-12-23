@@ -1,16 +1,53 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Registrar Empleado</title>
+{% extends 'base.html' %}
 
-    <link rel="stylesheet" href="{% static 'css/foundation.min.css' %}">
-</head>
-<body>
-    <form action="" method="post">{% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Agregar">
-    </form>
-</body>
-</html>
+{% load static%}
+
+{% block title %} Agregar Empleado{% endblock title %}
+
+{% block cuerpo %}
+    {% include "includes/header.html" %}
+        <!-- BLOQUE DE REGISTRO-->
+        <div class="grid-container">
+            <div class="grid-x">
+            <form class="cell grid-x" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="medium-6 cell">
+                    <label>Nombre:
+                        <p>{{ form.firts_name }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Apellidos:
+                        <p>{{ form.last_name }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Trabajo:
+                        <p>{{ form.job }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>departamento:
+                        <p>{{ form.departamento }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Avatar:
+                        <p>{{ form.avatar }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Habilidades:
+                        <p>{{ form.habilidades }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Hoja de vida:
+                        <p>{{ form.hoja_vida }}</p>
+                    </label>
+                </div>
+                <input class="button cell" type="submit" value="Agregar">
+            </form>
+        </div>
+    </div>
+    <!-- FIN BLOQUE DE REGISTRO -->
+{% endblock cuerpo %}

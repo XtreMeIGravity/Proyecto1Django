@@ -40,7 +40,7 @@ class Empleado(models.Model):
     class Meta:
         verbose_name = "Empleado"
         verbose_name_plural = "Empleados"
-        ordering = ['last_name', 'firts_name']
+        ordering = ['id', 'last_name', 'firts_name']
         unique_together = ('last_name', 'firts_name')
 
     def __str__(self):

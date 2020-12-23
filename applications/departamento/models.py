@@ -10,7 +10,7 @@ class Departamento(models.Model):
     class Meta:
         verbose_name = "Departamento"
         verbose_name_plural = "Departamentos"
-        ordering = ['short_name']
+        ordering = ['id']
         unique_together = ('name', 'short_name')
 
     def __str__(self):

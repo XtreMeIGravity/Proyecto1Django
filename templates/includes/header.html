@@ -5,15 +5,18 @@
       <li class="menu-text">Empleados</li>
 
       <li><a href="{% url 'Empleado_App:TodosLosEmpleados'  %}">Listar</a></li>
-      <li><a href="{% url 'Departamento_App:TodosLosDepartamentos'  %}">Departamentos</a></li>
-      <li><a href="#">Administrar</a></li>
+      <li><a href="{% url 'Departamento_App:TodosLosDepartamentos'  %}">Departamentos</a>
+         <ul class="submenu menu vertical" data-submenu>
+          <li><a href="{% url 'Departamento_App:NuevoDepartamento'  %}">Nuevo Departamento</a></li>
+        </ul>
+      </li>
 
     </ul>
   </div>
   <div class="top-bar-right">
     <ul class="menu">
       <li><input type="search" placeholder="Buscar Empleado"></li>
-      <li><button type="button" class="button">Registrar Nuevo</button></li>
+      <li><a class="button" href="{% url 'Empleado_App:RegistrarEmpleado' %}">Registrar Nuevo</a></li>
     </ul>
   </div>
 </div>

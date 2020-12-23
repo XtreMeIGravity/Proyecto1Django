@@ -26,8 +26,7 @@ class ListAllEmpleados(ListView):
     template_name = 'empleado/list_all.html'
     model = Empleado
     context_object_name = 'listaEmpleados'
-    ordering = 'firts_name'
-    paginate_by = 5
+    paginate_by = 7
 
     def get_queryset(self):
         busqueda = self.request.GET.get('keyword', '')
@@ -37,17 +36,25 @@ class ListAllEmpleados(ListView):
         return lista
 
 
+# Grid por departamento
+class ListEmpleadosByDepartamento(ListView):
+    template_name = 'empleado/listByDepartamento.html'
+    model = Empleado
+    context_object_name = 'listaEmpleados'
+    paginate_by = 7
+
+    def get_queryset(self):
+        busqueda = self.kwargs['NameDepto']
+        lista = Empleado.objects.filter(
+            departamento__name=busqueda,
+        )
+        return lista
+
+
 # Detail View
 class EmpleadoDetailView(DetailView):
     model = Empleado
     template_name = "empleado/EmpleadoDetailView.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(EmpleadoDetailView, self).get_context_data(**kwargs)
-        ListaChoice = Empleado.Job_Choices
-        res = [n[1] for n in ListaChoice if n[0] == self.object.job]
-        context['name_job'] = res[0]
-        return context
 
 
 # Success Message
@@ -59,16 +66,8 @@ class successEmpleado(TemplateView):
 class AddEmpleadoCreateView(CreateView):
     model = Empleado
     template_name = "empleado/AddEmpleado.html"
-    # fields = ('__all__')
-    fields = [
-        'firts_name',
-        'last_name',
-        'job',
-        'departamento',
-        'habilidades',
-        'hoja_vida',
-    ]
-    success_url = reverse_lazy('Empleado_App:Correcto')
+    fields = ('__all__')
+    success_url = reverse_lazy('Empleado_App:TodosLosEmpleados')
 
     def form_valid(self, form):
         # Logic Process
@@ -86,15 +85,8 @@ class successUpdateEmpleado(TemplateView):
 class EmpleadoUpdateView(UpdateView):
     model = Empleado
     template_name = "empleado/UpdateEmpleado.html"
-    fields = [
-        'firts_name',
-        'last_name',
-        'job',
-        'departamento',
-        'habilidades',
-        'hoja_vida',
-    ]
-    success_url = reverse_lazy('Empleado_App:Correcto')
+    fields = ('__all__')
+    success_url = reverse_lazy('Empleado_App:TodosLosEmpleados')
 
     # Intercept values of POST
     def post(self, request, *args, **kwargs):
@@ -114,5 +106,6 @@ class EmpleadoUpdateView(UpdateView):
 # delete view
 class EmpleadoDeleteView(DeleteView):
     model = Empleado
+    context_object_name = 'EmpleadoAEliminar'
     template_name = "empleado/DeleteEmpleado.html"
     success_url = reverse_lazy('Empleado_App:Correcto')

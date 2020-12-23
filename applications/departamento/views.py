@@ -39,7 +39,7 @@ class DepartamentoListView(ListView):
 class NewDepartamentoView(FormView):
     template_name = "departamento/NewDepartamento.html"
     form_class = NewDepartamentoForm
-    success_url = '/'
+    success_url = reverse_lazy('Departamento_App:TodosLosDepartamentos')
 
     def form_valid(self, form):
         # Logic Process

@@ -1,13 +1,53 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Actualizar Empleado</title>
-</head>
-<body>
-<form action="" method="post">{% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Actualizar">
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% load static%}
+
+{% block title %} Actualizar Empleado{% endblock title %}
+
+{% block cuerpo %}
+    {% include "includes/header.html" %}
+        <!-- BLOQUE de Registro -->
+        <div class="grid-container">
+            <div class="grid-x">
+            <form class="cell" action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+                <div class="medium-6 cell">
+                    <label>Nombre:
+                        <p>{{ form.firts_name }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Apellidos:
+                        <p>{{ form.last_name }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Trabajo:
+                        <p>{{ form.job }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>departamento:
+                        <p>{{ form.departamento }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Avatar:
+                        <p>{{ form.avatar }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Habilidades:
+                        <p>{{ form.habilidades }}</p>
+                    </label>
+                </div>
+                <div class="medium-6 cell">
+                    <label>Hoja de vida:
+                        <p>{{ form.hoja_vida }}</p>
+                    </label>
+                </div>
+                <input class="button cell" type="submit" value="Actualizar">
+            </form>
+        </div>
+    </div>
+    <!-- FIN BLOQUE GENERAL -->
+{% endblock cuerpo %}
