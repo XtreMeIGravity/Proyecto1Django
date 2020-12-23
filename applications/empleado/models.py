@@ -15,7 +15,7 @@ class Habilidad(models.Model):
         verbose_name_plural = "Habilidades"
 
     def __str__(self):
-        return str(self.id) + '-' + self.habilidad
+        return self.habilidad
 
 
 class Empleado(models.Model):
